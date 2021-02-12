@@ -13,7 +13,7 @@ public class Database {
 
     private Connection connection;
     private String login = "Brano";
-    private String password = "123456789";
+    private String password = "123456789"; //zmenene na 111111111
 
     //main for creating a user
     public static void main(String[] args) {
@@ -28,7 +28,8 @@ public class Database {
 
         //System.out.println(database.getUserId("Brano"));
 
-        //database.sendMessage(database.getUserId("Brano"), "Simon", "servus");
+        //database.sendMessage(database.getUserId("Brano"), "Simon", "jak sa mame?");
+        //database.sendMessage(database.getUserId("Brano"), "DANKO", "dobre ranko aj tebe Danko :)");
         List<Message> list = database.getMyMessages("Brano");
 
         System.out.println("Your messages: ");
@@ -44,7 +45,7 @@ public class Database {
         }
     }
 
-        database.deleteAllMyMessages("Brano");
+        //database.deleteAllMyMessages("Brano");
     }
 
 
@@ -237,6 +238,7 @@ public class Database {
                 }
                 connection.close();
                 // volame metodu deleteAllMyMessages
+                deleteAllMyMessages(login);
                 return list;
             } catch (SQLException throwables) {
                 throwables.printStackTrace();
