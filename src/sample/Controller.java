@@ -26,7 +26,7 @@ public class Controller {
     private Button loginButton;
 
     ///public
-    private String login = "";
+    public static String loginStatic = "";
 
 
     public void pressLoginButton(ActionEvent event) throws IOException {
@@ -38,7 +38,7 @@ public class Controller {
             boolean areYouLogin = database.login(login, password);
             if(areYouLogin){
                 System.out.println("You are there");
-                login = textLogin.getText();
+                loginStatic = textLogin.getText();
                 ///
                 //first way closing the first window
                 loginButton.getScene().getWindow().hide();
@@ -48,7 +48,7 @@ public class Controller {
                 //stage.close();
 
                 //opening a new formular
-                openTheSecondWindow(login);
+                openTheSecondWindow();
                 ///
             }else {
                 System.out.println("Something wrong!!!");
@@ -57,12 +57,28 @@ public class Controller {
         }
     }
 
-    private void openTheSecondWindow(String login) throws IOException {
+    private void openTheSecondWindow() throws IOException {
+        /*
         Stage primaryStage = new Stage();
         Parent root = FXMLLoader.load(getClass().getResource("chatMain.fxml"));
         primaryStage.setTitle("CHATING");
         primaryStage.setScene(new Scene(root, 600, 600));
         primaryStage.setResizable(false);
         primaryStage.show();
+         */
+
+        FXMLLoader root = new FXMLLoader();
+        root.setLocation(getClass().getResource("chatMain.fxml"));
+        Stage stage = new Stage();
+        stage.setTitle("CHATING");
+        stage.setScene(new Scene(root.load(), 600, 600));
+        stage.setResizable(false);
+        stage.show();
+        ChatMainController chatMainController = root.getController();
+        chatMainController.setName();
+        chatMainController.setPeople();
+        chatMainController.refreshMessages();
     }
+
+
 }

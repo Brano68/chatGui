@@ -271,4 +271,26 @@ public class Database {
         }
     }
 
+    //method who is in the table user
+    public List<String> AllUsers(){
+        List<String> list = new ArrayList<>();
+        if(createConnection()){
+            String query = "SELECT login from user";
+            try {
+                PreparedStatement ps = connection.prepareStatement(query);
+                ResultSet rs = ps.executeQuery();
+                while(rs.next()){
+                    String name = rs.getString("login");
+                    list.add(name);
+                }
+                connection.close();
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
+        }else{
+            System.out.println("Something is wrong");
+        }
+        return list;
+    }
+
 }
