@@ -25,14 +25,16 @@
       </Label>
       <Label layoutX="20.0" layoutY="166.0" text="Your messages" />
       <Label layoutX="466.0" layoutY="166.0" text="List of people in Chat" />
-      <TextArea editable="false" layoutX="22.0" layoutY="191.0" prefHeight="298.0" prefWidth="393.0" />
-      <TextArea fx:id="list_of_people" editable="false" layoutX="447.0" layoutY="191.0" prefHeight="298.0" prefWidth="146.0" />
+      <TextArea fx:id="list_of_messages" editable="false" layoutX="3.0" layoutY="220.0" prefHeight="298.0" prefWidth="440.0" />
+      <TextArea fx:id="list_of_people" editable="false" layoutX="461.0" layoutY="191.0" prefHeight="360.0" prefWidth="132.0" />
       <Line endX="479.0" layoutX="121.0" layoutY="165.0" startX="-127.0" />
-      <Button layoutX="546.0" layoutY="132.0" mnemonicParsing="false" text="Send" />
-      <TextField layoutX="60.0" layoutY="100.0" />
-      <TextField layoutX="60.0" layoutY="132.0" prefHeight="25.0" prefWidth="452.0" />
+      <Button layoutX="546.0" layoutY="132.0" mnemonicParsing="false" onAction="#sendMessage" text="Send" />
+      <TextField fx:id="receiver" layoutX="60.0" layoutY="100.0" />
+      <TextField fx:id="text_for_sending" layoutX="60.0" layoutY="132.0" prefHeight="25.0" prefWidth="452.0" />
       <Label layoutX="12.0" layoutY="104.0" text="Receiver" />
       <Label layoutX="9.0" layoutY="136.0" prefHeight="17.0" prefWidth="52.0" text="Message" />
-      <Button fx:id="button_refresh" layoutX="534.0" layoutY="561.0" mnemonicParsing="false" text="Refresh" />
+      <Button fx:id="button_refresh" layoutX="534.0" layoutY="561.0" mnemonicParsing="false" onAction="#refresButtonMethod" text="Refresh" />
+      <Label layoutX="14.0" layoutY="191.0" prefHeight="17.0" prefWidth="424.0" text="Day          Time          Sender          Receiver          Message" />
+      <ComboBox fx:id="combo_box" layoutX="222.0" layoutY="100.0" onAction="#copyName" prefWidth="150.0" />
    </children>
 </AnchorPane>

@@ -6,18 +6,28 @@ import javafx.animation.PauseTransition;
 import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
+import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.util.Duration;
 import sample.database.Database;
+import sample.entity.Message;
 
+import javax.xml.crypto.Data;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 public class ChatMainController extends Controller{
 
 
+    @FXML
+    private ComboBox combo_box;
+    @FXML
+    private TextArea list_of_messages;
+    @FXML
+    private TextField text_for_sending;
+    @FXML
+    private TextField receiver;
     @FXML
     private Button button_refresh;
     @FXML
@@ -53,7 +63,6 @@ public class ChatMainController extends Controller{
         }
     }
 
-
     public void refreshMessages() {
         Timeline t = new Timeline();
         t.setCycleCount(Timeline.INDEFINITE);
@@ -61,8 +70,86 @@ public class ChatMainController extends Controller{
                 Duration.millis(15000),
                 (ActionEvent event) -> {
                     System.out.println("AHOJ");
+                    list_of_messages.clear();
+                    List<Message> list = new Database().getMyMessages(loginStatic);
+                    if(list.isEmpty()){
+                        list_of_messages.appendText("You do not have any new messages");
+                    }
+                    else{
+                        for(Message m : list){
+                            Date date = m.getDt();
+                            SimpleDateFormat formatter = new SimpleDateFormat("dd-M-yyyy hh:mm:ss");
+                            String strDate = formatter.format(date);
+                            String od = m.getFrom();
+                            String komu = loginStatic;
+                            String message = m.getText();
+                            list_of_messages.appendText(strDate + " " +od + " " + komu + " " + message + '\n');
+                        }
+                    }
+
                 }
         ));
         t.play();
+    }
+
+    public void sendMessage(ActionEvent event) {
+        String message = text_for_sending.getText();
+        String prijemca = receiver.getText();
+        if(message != null && message != "" && prijemca != null && prijemca != ""){
+            Database database = new Database();
+            database.sendMessage(database.getUserId(loginStatic), prijemca, message);
+        }
+        text_for_sending.setText("");
+        receiver.setText("");
+    }
+
+    public void refresButtonMethod(ActionEvent event) {
+        list_of_messages.clear();
+
+        List<Message> list = new Database().getMyMessages(loginStatic);
+        if(list.isEmpty()){
+            list_of_messages.appendText("You do not have any new messages");
+        }
+        else{
+            /*
+            for(Message m : list){
+                Date date = m.getDt();
+                SimpleDateFormat formatter = new SimpleDateFormat("dd-M-yyyy hh:mm:ss");
+                String strDate = formatter.format(date);
+                String od = m.getFrom();
+                String komu = loginStatic;
+                String message = m.getText();
+                list_of_messages.appendText(strDate + " " +od + " " + komu + " " + message + '\n');
+            }
+
+             */
+            //od zadu
+            for(int i = list.size()-1; i >= 0 ; i--){
+                Message message = list.get(i);
+                Date date = message.getDt();
+                SimpleDateFormat formatter = new SimpleDateFormat("dd-M-yyyy hh:mm:ss");
+                String strDate = formatter.format(date);
+                String od = message.getFrom();
+                String komu = loginStatic;
+                String messagee = message.getText();
+                list_of_messages.appendText(strDate + " " +od + " " + komu + " " + messagee + '\n');
+            }
+        }
+    }
+
+    public void setCHOICE(){
+        List<String> list = new Database().AllUsers();
+        if(list.isEmpty()){
+            return;
+        }else{
+            for(String s : list){
+                combo_box.getItems().add(s);
+            }
+        }
+
+    }
+
+    public void copyName(ActionEvent event) {
+        receiver.setText((String)combo_box.getValue());
     }
 }

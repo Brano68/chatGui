@@ -77,6 +77,7 @@ public class Controller {
         ChatMainController chatMainController = root.getController();
         chatMainController.setName();
         chatMainController.setPeople();
+        chatMainController.setCHOICE();
         chatMainController.refreshMessages();
     }
 

@@ -3,6 +3,7 @@ package sample.database;
 import sample.entity.Message;
 
 import java.sql.*;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,6 +31,7 @@ public class Database {
 
         //database.sendMessage(database.getUserId("Brano"), "Simon", "jak sa mame?");
         //database.sendMessage(database.getUserId("Brano"), "DANKO", "dobre ranko aj tebe Danko :)");
+        /*
         List<Message> list = database.getMyMessages("Brano");
 
         System.out.println("Your messages: ");
@@ -43,9 +45,14 @@ public class Database {
 
                 }
         }
+
+
     }
 
         //database.deleteAllMyMessages("Brano");
+
+         */
+        database.getMyMessages("Brano");
     }
 
 
@@ -232,13 +239,21 @@ public class Database {
                     String fromUser = rs.getString("Sender");
                     int toUser = rs.getInt("toUser");
                     String text = rs.getString("text");
-                    //System.out.println(id + " " + date + " " + fromUser +" " + login + " " + text);
-                    Message message = new Message(id, fromUser, login, date, text);
+                    //SimpleDateFormat formatter = new SimpleDateFormat("dd-M-yyyy hh:mm:ss");
+                    //String strDate = formatter.format(date);
+                    Timestamp timestamp = rs.getTimestamp("dt");
+                    //System.out.println(timestamp);
+                    Date date1 = new Date(timestamp.getTime());
+                    //SimpleDateFormat formatter = new SimpleDateFormat("dd-M-yyyy hh:mm:ss");
+                    //String strDate = formatter.format(date1);
+                    //System.out.println("Skusam" + strDate);
+                    //System.out.println(id + " " + date + " " + fromUser +" " + login + " " + text +" "+ date1);
+                    Message message = new Message(id, fromUser, login, date1, text);
                     list.add(message);
                 }
                 connection.close();
                 // volame metodu deleteAllMyMessages
-                deleteAllMyMessages(login);
+                //deleteAllMyMessages(login);
                 return list;
             } catch (SQLException throwables) {
                 throwables.printStackTrace();
