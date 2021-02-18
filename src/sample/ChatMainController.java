@@ -175,4 +175,23 @@ public class ChatMainController extends Controller{
             }
         }
     }
+
+    public void addEmogyBall(ActionEvent event) {
+        String string = text_for_sending.getText();
+        char znak = '\u26BD';
+        text_for_sending.setText(string + znak);
+    }
+
+    public void addEmogySnowman(ActionEvent event) {
+        String string = text_for_sending.getText();
+        char znak = '\u26C4';
+        text_for_sending.setText(string + znak);
+    }
+
+
+    public void addEmogyHand(ActionEvent event) {
+        String string = text_for_sending.getText();
+        char znak = '\u270B';
+        text_for_sending.setText(string + znak);
+    }
 }

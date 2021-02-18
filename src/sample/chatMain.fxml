@@ -52,5 +52,19 @@
             <Font size="13.0" />
          </font>
       </Button>
+      <Button layoutX="444.0" layoutY="94.0" mnemonicParsing="false" onAction="#addEmogyBall" prefHeight="31.0" prefWidth="35.0" text="⚽">
+         <font>
+            <Font size="15.0" />
+         </font></Button>
+      <Button layoutX="488.0" layoutY="94.0" mnemonicParsing="false" onAction="#addEmogySnowman" prefHeight="31.0" prefWidth="35.0" text="⛄">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Button>
+      <Button layoutX="534.0" layoutY="94.0" mnemonicParsing="false" onAction="#addEmogyHand" text="✋">
+         <font>
+            <Font size="15.0" />
+         </font></Button>
+      <Label layoutX="390.0" layoutY="104.0" text="Emogies:" />
    </children>
 </AnchorPane>
