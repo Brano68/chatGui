@@ -21,6 +21,10 @@ public class ChatMainController extends Controller{
 
 
     @FXML
+    private TextField new_password;
+    @FXML
+    private TextField old_password;
+    @FXML
     private ComboBox combo_box;
     @FXML
     private TextArea list_of_messages;
@@ -70,6 +74,8 @@ public class ChatMainController extends Controller{
                 Duration.millis(15000),
                 (ActionEvent event) -> {
                     System.out.println("AHOJ");
+                    refresButtonMethod(null);
+                    /*
                     list_of_messages.clear();
                     List<Message> list = new Database().getMyMessages(loginStatic);
                     if(list.isEmpty()){
@@ -86,6 +92,8 @@ public class ChatMainController extends Controller{
                             list_of_messages.appendText(strDate + " " +od + " " + komu + " " + message + '\n');
                         }
                     }
+
+                     */
 
                 }
         ));
@@ -151,5 +159,20 @@ public class ChatMainController extends Controller{
 
     public void copyName(ActionEvent event) {
         receiver.setText((String)combo_box.getValue());
+    }
+
+    public void changePassword(ActionEvent event) {
+        String stareHeslo = old_password.getText();
+        String noveheslo = new_password.getText();
+        if(stareHeslo == null || noveheslo == null || stareHeslo == "" || noveheslo == ""){
+            System.out.println("You have not tiped it correctlly!!!");
+            return;
+        }else{
+            if(new Database().changePassword(stareHeslo, loginStatic, noveheslo)){
+                System.out.println("Your password has been changed!!!");
+            }else{
+                System.out.println("Something wrong!!!");
+            }
+        }
     }
 }

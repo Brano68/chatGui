@@ -14,7 +14,7 @@ public class Database {
 
     private Connection connection;
     private String login = "Brano";
-    private String password = "123456789"; //zmenene na 111111111
+    private String password = "123456789"; //zmenene na 111111111 zmenene na 222222222
 
     //main for creating a user
     public static void main(String[] args) {
@@ -151,6 +151,9 @@ public class Database {
                 int result = ps.executeUpdate();
                 System.out.println(result);
                 connection.close();
+                if(result == 0){
+                    return false;
+                }
                 return true;
             } catch (SQLException throwables) {
                 throwables.printStackTrace();
