@@ -174,6 +174,8 @@ public class ChatMainController extends Controller{
                 System.out.println("Something wrong!!!");
             }
         }
+        old_password.setText("");
+        new_password.setText("");
     }
 
     public void addEmogyBall(ActionEvent event) {
